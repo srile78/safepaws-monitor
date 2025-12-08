@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pet Food Recall Monitor",
-  description: "Monitor potentially dangerous pet food recalls",
+  title: "SafePaws Monitor | Real-Time Pet Food Recalls",
+  description: "Instant alerts for dog and cat food recalls. Protect your pets with real-time FDA safety data.",
 };
 
 export default function RootLayout({
