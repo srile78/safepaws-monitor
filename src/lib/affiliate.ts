@@ -1,5 +1,5 @@
 // TODO: USER_ACTION - Replace 'safepaws-20' with your actual Amazon Associate Tag
-export const AFFILIATE_TAG = 'safepaws-20';
+export const AFFILIATE_TAG = 'safepawsmonit-20';
 
 /**
  * Generates an Amazon affiliate link for a given keyword or product.
