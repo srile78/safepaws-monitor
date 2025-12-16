@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import { AFFILIATE_TAG } from './affiliate';
 
 export function getSafeLink(term: string): string {
