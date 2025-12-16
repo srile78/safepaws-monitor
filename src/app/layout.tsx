@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   description: "Instant alerts for dog and cat food recalls. Protect your pets with real-time FDA safety data.",
 };
 
+import Script from 'next/script';
+
+// ... imports
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,6 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8082302563728806"
+        />
         {children}
 
         {/* Professional Footer */}
