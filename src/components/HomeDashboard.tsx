@@ -77,7 +77,7 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                                 Has your food <br /> been recalled?
                             </h2>
                             <p className="text-lg text-gray-700 mb-8 max-w-md mx-auto md:mx-0">
-                                We monitor FDA alerts 24/7 so you never miss a warning. Check your pantry now.
+                                We monitor <span className="font-bold text-red-600">{recalls.length}</span> active FDA alerts 24/7 so you never miss a warning. Check your pantry now.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 <a href="#recalls" className="px-8 py-3 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 transition-transform hover:scale-105 shadow-lg text-center">
