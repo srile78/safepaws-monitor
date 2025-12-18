@@ -9,6 +9,7 @@ import RecallGrid from './RecallGrid';
 import SearchBar from './SearchBar';
 import EmailSignup from './EmailSignup';
 import LegalDisclaimer from './LegalDisclaimer';
+import AdUnit from './AdUnit';
 
 interface HomeDashboardProps {
     recalls: Recall[];
@@ -143,6 +144,12 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                             <span className={`font-bold text-lg ${categoryFilter === 'Cat' ? 'text-[#128CED]' : 'text-gray-700'}`}>Cat</span>
                         </button>
                     </div>
+                </div>
+
+                {/* Manual Ad Unit - Placeholder Slot ID */}
+                <div className="border border-dashed border-gray-300 bg-gray-50 rounded-lg p-4">
+                    {/* NOTE: Replace '1234567890' with a real data-ad-slot ID from AdSense dashboard */}
+                    <AdUnit slotId="1234567890" />
                 </div>
 
                 {/* Email Signup with ID for anchor link */}
