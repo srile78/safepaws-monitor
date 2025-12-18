@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
+import Image from 'next/image';
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -37,6 +38,14 @@ export default function RootLayout({
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {/* Col 1 */}
               <div>
+                <div className="mb-6 relative h-16 w-48">
+                  <Image
+                    src="/safepaws-logo.png"
+                    alt="SafePaws Logo"
+                    fill
+                    className="object-contain object-left"
+                  />
+                </div>
                 <h4 className="font-bold text-gray-900 mb-4">About SafePaws</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/about" className="hover:text-blue-600">Our Mission</Link></li>
