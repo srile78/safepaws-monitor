@@ -10,6 +10,9 @@ const nunito = Nunito({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SafePaws Monitor | Real-Time Pet Food Recalls",
   description: "Instant alerts for dog and cat food recalls. Protect your pets with real-time FDA safety data.",
+  other: {
+    'impact-site-verification': 'b5f79bd1-af48-4a7f-967c-be4890736e6f',
+  },
 };
 
 import Script from 'next/script';
