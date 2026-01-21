@@ -4,6 +4,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
 import Image from 'next/image';
+import CookieConsent from '../components/CookieConsent';
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
       </head>
       <body className={nunito.className}>
         {children}
+        <CookieConsent />
 
         {/* Professional Footer */}
         <footer className="bg-gray-100 border-t border-gray-200 text-gray-700 pt-16 pb-8">
@@ -70,7 +72,7 @@ export default function RootLayout({
               <div>
                 <h4 className="font-bold text-gray-900 mb-4">Support</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><Link href="#" className="hover:text-blue-600">Contact Us</Link></li>
+                  <li><Link href="/contact" className="hover:text-blue-600">Contact Us</Link></li>
                   <li><Link href="#" className="hover:text-blue-600">FAQ</Link></li>
                   <li><Link href="#" className="hover:text-blue-600">Report an Issue</Link></li>
                 </ul>
