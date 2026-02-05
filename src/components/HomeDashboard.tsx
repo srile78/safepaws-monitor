@@ -146,6 +146,23 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                     </div>
                 </div>
 
+                {/* 4. FEATURED GUIDES (New for AdSense Quality) */}
+                <div className="bg-blue-50 rounded-[2rem] p-8 md:p-12 border border-blue-100">
+                    <div className="text-center mb-8">
+                        <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">Essential Safety Guides</h3>
+                        <p className="text-gray-600">Expert advice to keep your pet healthy beyond just recalls.</p>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                        <GuideLink href="/resources/toxic-foods" emoji="🚫" title="Toxic Foods" />
+                        <GuideLink href="/resources/dog-diets" emoji="🐕" title="Dog Diets" />
+                        <GuideLink href="/resources/cat-diets" emoji="🐱" title="Cat Nutrition" />
+                        <GuideLink href="/resources/raw-vs-processed" emoji="🥩" title="Raw vs. Kibble" />
+                    </div>
+                    <div className="text-center mt-8">
+                        <Link href="/resources" className="text-blue-600 font-bold hover:underline">View All Guides &rarr;</Link>
+                    </div>
+                </div>
+
                 {/* Manual Ad Unit - Placeholder Slot ID */}
                 <div className="border border-dashed border-gray-300 bg-gray-50 rounded-lg p-4">
                     {/* NOTE: Replace '1234567890' with a real data-ad-slot ID from AdSense dashboard */}
@@ -167,4 +184,13 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
             </div>
         </div>
     );
+}
+
+function GuideLink({ href, emoji, title }: { href: string, emoji: string, title: string }) {
+    return (
+        <Link href={href} className="flex flex-col items-center justify-center bg-white p-6 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all border border-gray-100 text-center h-full">
+            <span className="text-3xl mb-3">{emoji}</span>
+            <span className="font-bold text-gray-900 text-sm md:text-base leading-tight">{title}</span>
+        </Link>
+    )
 }
