@@ -55,6 +55,7 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                     {/* Right Actions (Mock) */}
                     <div className="flex items-center gap-6 text-white font-bold text-sm">
                         <Link href="/resources" className="hidden sm:block hover:text-blue-200">Resources</Link>
+                        <Link href="/blog" className="hidden sm:block hover:text-blue-200">Blog</Link>
                         <Link href="/about" className="hidden sm:block hover:text-blue-200">About</Link>
                         <Link href="#signup" className="flex items-center gap-2 hover:text-blue-200">
                             <span className="bg-white/20 p-2 rounded-full">🔔</span>
