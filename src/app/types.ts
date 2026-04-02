@@ -7,4 +7,12 @@ export interface Recall {
     report_date: string;
     classification: string;
     brand_name: string;
+    // Fields from real FDA OpenFDA API data
+    severity?: string;
+    recalling_firm?: string;
+    pet_type?: string;
+    city?: string;
+    state?: string;
+    voluntary_mandated?: string;
+    recall_initiation_date?: string;
 }

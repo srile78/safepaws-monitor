@@ -16,8 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-import Script from 'next/script';
-
 // ... imports
 
 export default function RootLayout({
@@ -28,11 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8082302563728806"
-          crossOrigin="anonymous"
-        ></script>
+        {/* TODO: Re-add AdSense script AFTER approval:
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8082302563728806" crossOrigin="anonymous"></script>
+        */}
       </head>
       <body className={nunito.className}>
         {children}
@@ -56,7 +52,7 @@ export default function RootLayout({
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/about" className="hover:text-blue-600">Our Mission</Link></li>
                   <li><Link href="/about" className="hover:text-blue-600">The Team</Link></li>
-                  <li><Link href="#" className="hover:text-blue-600">Careers</Link></li>
+                  <li><Link href="/blog" className="hover:text-blue-600">Blog</Link></li>
                 </ul>
               </div>
               {/* Col 2 */}
@@ -73,15 +69,14 @@ export default function RootLayout({
                 <h4 className="font-bold text-gray-900 mb-4">Support</h4>
                 <ul className="space-y-2 text-sm">
                   <li><Link href="/contact" className="hover:text-blue-600">Contact Us</Link></li>
-                  <li><Link href="#" className="hover:text-blue-600">FAQ</Link></li>
-                  <li><Link href="#" className="hover:text-blue-600">Report an Issue</Link></li>
+                  <li><Link href="/blog/how-to-read-pet-food-recall-notice" className="hover:text-blue-600">FAQ</Link></li>
                 </ul>
               </div>
               {/* Col 4 */}
               <div>
                 <h4 className="font-bold text-gray-900 mb-4">Stay Connected</h4>
                 <p className="text-sm text-gray-600 mb-4">
-                  Join 10,000+ pet parents getting daily safety alerts.
+                  Get free recall alerts delivered to your inbox.
                 </p>
                 <div className="flex space-x-4">
                   {/* Social Links (Coming Soon) */}

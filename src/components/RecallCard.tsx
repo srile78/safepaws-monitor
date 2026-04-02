@@ -1,6 +1,14 @@
 import React from 'react';
 import { Recall } from '../app/types';
-import { getAmazonLink } from '../lib/affiliate';
+
+/**
+ * Generates a plain Amazon search link (no affiliate tag) for finding safe alternatives.
+ * TODO: Re-enable affiliate tag after AdSense approval.
+ */
+function getSafeAlternativeLink(productDescription: string): string {
+    const encodedKeyword = encodeURIComponent(productDescription);
+    return `https://www.amazon.com/s?k=${encodedKeyword}`;
+}
 
 interface RecallCardProps {
     recall: Recall;
@@ -82,14 +90,26 @@ export default function RecallCard({ recall, highlightTerm }: RecallCardProps) {
                     <HighlightedText text={truncatedDescription} term={highlightTerm} />
                 </h3>
 
-                <p className="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
+                <p className="text-sm text-gray-600 mb-2 flex-grow leading-relaxed">
                     <span className="text-gray-900 font-bold block mb-1">Reason for Recall:</span>
                     <HighlightedText text={recall.reason_for_recall} term={highlightTerm} />
                 </p>
 
+                {recall.recalling_firm && (
+                    <p className="text-xs text-gray-500 mb-4">
+                        <span className="font-semibold">Recalled by:</span> {recall.recalling_firm}
+                    </p>
+                )}
+
+                {recall.distribution_pattern && (
+                    <p className="text-xs text-gray-500 mb-6">
+                        <span className="font-semibold">Distribution:</span> {recall.distribution_pattern.length > 80 ? recall.distribution_pattern.substring(0, 80) + '...' : recall.distribution_pattern}
+                    </p>
+                )}
+
                 <div className="mt-auto pt-0">
                     <a
-                        href={getAmazonLink(recall.product_description, undefined)}
+                        href={getSafeAlternativeLink(recall.product_description)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full flex justify-center items-center px-6 py-4 text-base font-extrabold rounded-2xl text-white bg-[#128CED] hover:bg-blue-600 hover:scale-[1.02] shadow-[0_4px_14px_rgba(18,140,237,0.3)] hover:shadow-[0_6px_20px_rgba(18,140,237,0.4)] transition-all duration-200"

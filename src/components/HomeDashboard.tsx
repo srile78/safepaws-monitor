@@ -9,7 +9,6 @@ import RecallGrid from './RecallGrid';
 import SearchBar from './SearchBar';
 import EmailSignup from './EmailSignup';
 import LegalDisclaimer from './LegalDisclaimer';
-import AdUnit from './AdUnit';
 
 interface HomeDashboardProps {
     recalls: Recall[];
@@ -162,12 +161,6 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                     <div className="text-center mt-8">
                         <Link href="/resources" className="text-blue-600 font-bold hover:underline">View All Guides &rarr;</Link>
                     </div>
-                </div>
-
-                {/* Manual Ad Unit - Placeholder Slot ID */}
-                <div className="border border-dashed border-gray-300 bg-gray-50 rounded-lg p-4">
-                    {/* NOTE: Replace '1234567890' with a real data-ad-slot ID from AdSense dashboard */}
-                    <AdUnit slotId="1234567890" />
                 </div>
 
                 {/* Email Signup with ID for anchor link */}
