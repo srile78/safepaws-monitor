@@ -49,9 +49,9 @@ const FOODS: FoodDef[] = [
 
 const GAME_WIDTH = 400;
 const GAME_HEIGHT = 600;
-const BOWL_WIDTH = 70;
+const BOWL_WIDTH = 80;
 const BOWL_Y = GAME_HEIGHT - 60;
-const FOOD_SIZE = 36;
+const FOOD_SIZE = 44;
 
 type PetChoice = 'dog' | 'cat';
 type GameState = 'menu' | 'playing' | 'paused' | 'gameover';
@@ -81,8 +81,8 @@ export default function RainingGame() {
 
   const spawnFood = useCallback(() => {
     const food = FOODS[Math.floor(Math.random() * FOODS.length)];
-    const baseSpeed = 1.5 + (levelRef.current - 1) * 0.4;
-    const speed = baseSpeed + Math.random() * 1.5;
+    const baseSpeed = 0.8 + (levelRef.current - 1) * 0.2;
+    const speed = baseSpeed + Math.random() * 0.6;
     foodsRef.current.push({
       id: nextIdRef.current++,
       emoji: food.emoji,
@@ -254,13 +254,14 @@ export default function RainingGame() {
       ctx.textBaseline = 'top';
       for (const food of foodsRef.current) {
         // Glow for toxic foods
-        if (!food.isSafe && food.y > 0) {
-          ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
-          ctx.beginPath();
-          ctx.arc(food.x + FOOD_SIZE / 2, food.y + FOOD_SIZE / 2, FOOD_SIZE / 2 + 4, 0, Math.PI * 2);
-          ctx.fill();
-        }
+
         ctx.fillText(food.emoji, food.x, food.y);
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = food.isSafe ? '#166534' : '#991B1B';
+        ctx.fillText(food.name, food.x + FOOD_SIZE / 2, food.y + FOOD_SIZE + 12);
+        ctx.font = `${FOOD_SIZE}px serif`;
+        ctx.textAlign = 'left';
       }
 
       // Bowl
