@@ -1,50 +1,34 @@
 ﻿f = open('src/app/game/RainingGame.tsx', 'r', encoding='utf-8').read()
 
-# Slow down the foods - lower base speed and less random variance
+# Spawn foods less frequently - bigger gap between spawns
 f = f.replace(
-    "const baseSpeed = 1.5 + (levelRef.current - 1) * 0.4;",
-    "const baseSpeed = 0.8 + (levelRef.current - 1) * 0.2;"
-)
-f = f.replace(
-    "const speed = baseSpeed + Math.random() * 1.5;",
-    "const speed = baseSpeed + Math.random() * 0.6;"
+    "const spawnRate = Math.max(30, 70 - levelRef.current * 5);",
+    "const spawnRate = Math.max(50, 120 - levelRef.current * 7);"
 )
 
-# Remove the washed-out glow effect on toxic foods
+# Limit max foods on screen and prevent horizontal overlap
 f = f.replace(
-    """        if (!food.isSafe && food.y > 0) {
-          ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
-          ctx.beginPath();
-          ctx.arc(food.x + FOOD_SIZE / 2, food.y + FOOD_SIZE / 2, FOOD_SIZE / 2 + 4, 0, Math.PI * 2);
-          ctx.fill();
-        }""",
-    ""
+    "const food = FOODS[Math.floor(Math.random() * FOODS.length)];",
+    """// Max 4 foods on screen at once
+    if (foodsRef.current.length >= 4) return;
+    const food = FOODS[Math.floor(Math.random() * FOODS.length)];"""
 )
 
-# Make food emojis bigger
-f = f.replace("const FOOD_SIZE = 36;", "const FOOD_SIZE = 44;")
-
-# Make the bowl wider to match bigger foods
-f = f.replace("const BOWL_WIDTH = 70;", "const BOWL_WIDTH = 80;")
-
-# Add food name label under each emoji
+# After setting x position, check it doesnt overlap existing foods
 f = f.replace(
-    "ctx.fillText(food.emoji, food.x, food.y);",
-    """ctx.fillText(food.emoji, food.x, food.y);
-        ctx.font = 'bold 11px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = food.isSafe ? '#166534' : '#991B1B';
-        ctx.fillText(food.name, food.x + FOOD_SIZE / 2, food.y + FOOD_SIZE + 12);
-        ctx.font = str(FOOD_SIZE) + 'px serif';
-        ctx.textAlign = 'left';"""
-)
-
-# Fix the font reset (template literal)
-f = f.replace("str(FOOD_SIZE)", "FOOD_SIZE")
-f = f.replace(
-    "ctx.font = FOOD_SIZE + 'px serif';",
-    "ctx.font = `${FOOD_SIZE}px serif`;"
+    "x: Math.random() * (GAME_WIDTH - FOOD_SIZE),",
+    """x: (() => {
+        let x, attempts = 0;
+        do {
+          x = Math.random() * (GAME_WIDTH - FOOD_SIZE);
+          attempts++;
+        } while (
+          attempts < 10 &&
+          foodsRef.current.some(f => Math.abs(f.x - x) < FOOD_SIZE * 1.8 && f.y < FOOD_SIZE * 3)
+        );
+        return x;
+      })(),"""
 )
 
 open('src/app/game/RainingGame.tsx', 'w', encoding='utf-8').write(f)
-print("Done - slower speed, bigger food, labels, no glow")
+print("Done - max 4 foods, spaced out, less overlap")

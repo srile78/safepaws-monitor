@@ -80,6 +80,8 @@ export default function RainingGame() {
   const gameStateRef = useRef<GameState>('menu');
 
   const spawnFood = useCallback(() => {
+    // Max 4 foods on screen at once
+    if (foodsRef.current.length >= 4) return;
     const food = FOODS[Math.floor(Math.random() * FOODS.length)];
     const baseSpeed = 0.8 + (levelRef.current - 1) * 0.2;
     const speed = baseSpeed + Math.random() * 0.6;
@@ -87,7 +89,17 @@ export default function RainingGame() {
       id: nextIdRef.current++,
       emoji: food.emoji,
       name: food.name,
-      x: Math.random() * (GAME_WIDTH - FOOD_SIZE),
+      x: (() => {
+        let x, attempts = 0;
+        do {
+          x = Math.random() * (GAME_WIDTH - FOOD_SIZE);
+          attempts++;
+        } while (
+          attempts < 10 &&
+          foodsRef.current.some(f => Math.abs(f.x - x) < FOOD_SIZE * 1.8 && f.y < FOOD_SIZE * 3)
+        );
+        return x;
+      })(),
       y: -FOOD_SIZE,
       speed,
       isSafe: food.isSafe,
@@ -157,7 +169,7 @@ export default function RainingGame() {
       frameCountRef.current++;
 
       // Spawn foods
-      const spawnRate = Math.max(30, 70 - levelRef.current * 5);
+      const spawnRate = Math.max(50, 120 - levelRef.current * 7);
       if (frameCountRef.current % spawnRate === 0) {
         spawnFood();
       }
