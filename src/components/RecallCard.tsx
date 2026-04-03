@@ -98,7 +98,7 @@ export default function RecallCard({ recall, highlightTerm }: RecallCardProps) {
                     <span className="text-xs text-gray-500 font-bold bg-gray-100 px-3 py-1 rounded-full">{recall.report_date}</span>
                 </div>
 
-                <h3 className="text-xl font-extrabold text-gray-900 mb-3 leading-snug group-hover:text-[color:var(--primary-blue)] transition-colors" title={recall.product_description}>
+                <h3 className="text-xl font-extrabold text-gray-900 mb-3 leading-snug group-hover:text-[#128CED] transition-colors" title={recall.product_description}>
                     <HighlightedText text={truncatedDescription} term={highlightTerm} />
                 </h3>
 

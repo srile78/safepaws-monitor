@@ -1,7 +1,4 @@
-﻿f = open('src/app/types.ts', 'r', encoding='utf-8').read()
-if 'image?' not in f:
-    f = f.replace('severity?: string;', 'image?: string;\n    severity?: string;')
-    open('src/app/types.ts', 'w', encoding='utf-8').write(f)
-    print("Added image field to Recall type")
-else:
-    print("Image field already exists")
+﻿f = open('src/components/RecallCard.tsx', 'r', encoding='utf-8').read()
+f = f.replace('group-hover:text-[color:var(--primary-blue)]', 'group-hover:text-[#128CED]')
+open('src/components/RecallCard.tsx', 'w', encoding='utf-8').write(f)
+print("Fixed hover text color")
