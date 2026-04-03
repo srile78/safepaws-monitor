@@ -158,6 +158,7 @@ export default function HomeDashboard({ recalls }: HomeDashboardProps) {
                         <GuideLink href="/resources/cat-diets" emoji="🐱" title="Cat Nutrition" />
                         <GuideLink href="/resources/raw-vs-processed" emoji="🥩" title="Raw vs. Kibble" />
                         <GuideLink href="/food-checker" emoji="🍎" title="Can My Pet Eat This?" />
+                        <GuideLink href="/game" emoji="🎮" title="Play: Raining Cats & Dogs" />
                     </div>
                     <div className="text-center mt-8">
                         <Link href="/resources" className="text-blue-600 font-bold hover:underline">View All Guides &rarr;</Link>
