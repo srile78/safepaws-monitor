@@ -8,6 +8,7 @@ export interface Recall {
     classification: string;
     brand_name: string;
     // Fields from real FDA OpenFDA API data
+    image?: string;
     severity?: string;
     recalling_firm?: string;
     pet_type?: string;

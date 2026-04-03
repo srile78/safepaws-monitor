@@ -14,7 +14,8 @@
     "city": "Westfield",
     "state": "MA",
     "voluntary_mandated": "Voluntary: Firm initiated",
-    "recall_initiation_date": "20190617"
+    "recall_initiation_date": "20190617",
+    "image": "/recalls/freshpet-kitchen.jpg"
   },
   {
     "recall_number": "83178",
@@ -31,6 +32,7 @@
     "city": "Westfield",
     "state": "MA",
     "voluntary_mandated": "Voluntary: Firm initiated",
-    "recall_initiation_date": "20190617"
+    "recall_initiation_date": "20190617",
+    "image": "/recalls/freshpet-grain-free.jpg"
   }
 ]

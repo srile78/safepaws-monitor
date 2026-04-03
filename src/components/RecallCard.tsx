@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Recall } from '../app/types';
 
 /**
@@ -62,9 +63,20 @@ export default function RecallCard({ recall, highlightTerm }: RecallCardProps) {
 
     return (
         <div className={`group rounded-[2rem] bg-white border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full overflow-hidden relative`}>
-            {/* Status Bar - Bolder */}
-            <div className={`h-6 w-full ${isClassI ? 'bg-red-500' : 'bg-amber-400'}`} />
+            {/* Status Bar */}
+            <div className={`h-2 w-full ${isClassI ? 'bg-red-500' : 'bg-amber-400'}`} />
 
+            {recall.image && (
+                <div className="relative w-full h-40 bg-gray-100">
+                    <Image
+                        src={recall.image}
+                        alt={recall.product_description}
+                        fill
+                        className="object-contain p-3"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                </div>
+            )}
             <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-4">
                     {/* Badge with Icon */}
