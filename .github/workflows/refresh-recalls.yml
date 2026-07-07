@@ -1,0 +1,39 @@
+name: Refresh FDA recalls
+
+# Keeps recalls.json current by re-scraping the FDA animal-veterinary recalls
+# page daily. If the data changed, it commits — which (with Vercel/Netlify
+# auto-deploy connected to this repo) redeploys the site with fresh data.
+# This is what makes the site's "checked every 24 hours" claim actually true.
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   # 11:00 UTC daily
+  workflow_dispatch: {}      # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Scrape latest FDA recalls
+        run: node scripts/fetch-recalls.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- recalls.json; then
+            echo "No recall changes."
+          else
+            git config user.name "safepaws-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add recalls.json
+            git commit -m "chore: refresh FDA recall data [skip ci]"
+            git push
+          fi

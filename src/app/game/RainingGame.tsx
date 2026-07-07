@@ -90,7 +90,7 @@ export default function RainingGame() {
       emoji: food.emoji,
       name: food.name,
       x: (() => {
-        let x, attempts = 0;
+        let x = 0, attempts = 0;
         do {
           x = Math.random() * (GAME_WIDTH - FOOD_SIZE);
           attempts++;

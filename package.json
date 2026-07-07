@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch:recalls": "node scripts/fetch-recalls.mjs"
   },
   "dependencies": {
     "next": "14.1.0",
