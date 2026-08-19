@@ -18,13 +18,51 @@ import { dirname, join } from 'node:path';
 
 const SOURCE = 'https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals';
 const FDA_ORIGIN = 'https://www.fda.gov';
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36';
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36';
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'recalls.json');
+
+// Retry configuration — the FDA site (on Akamai CDN) occasionally blocks
+// GitHub Actions IP ranges transiently. Three attempts with backoff recovers
+// from temporary rate-limiting without failing the whole workflow.
+const RETRY_ATTEMPTS = 3;
+const RETRY_BASE_MS = 8000; // 8 s, 16 s, 32 s
 
 // Pathogen/toxin recalls are life-threatening → Class I (DANGER). Nutritional
 // imbalances and foreign-material recalls → Class II (WARNING). This drives the
 // red/yellow card styling in RecallCard.tsx.
 const CLASS_I = /salmonella|listeria|aflatoxin|botulism|e\.?\s?coli|toxin|pathogen|contaminat/i;
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithRetry(url) {
+  const headers = {
+    'User-Agent': UA,
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+  };
+
+  for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
+    try {
+      console.log(`[*] Attempt ${attempt}/${RETRY_ATTEMPTS}: fetching ${url}`);
+      const res = await fetch(url, { headers });
+      if (res.ok) return res;
+      const msg = `HTTP ${res.status} ${res.statusText}`;
+      if (attempt === RETRY_ATTEMPTS) throw new Error(`FDA fetch failed after ${RETRY_ATTEMPTS} attempts: ${msg}`);
+      const wait = RETRY_BASE_MS * attempt;
+      console.warn(`[!] ${msg} — retrying in ${wait / 1000}s…`);
+      await sleep(wait);
+    } catch (err) {
+      if (attempt === RETRY_ATTEMPTS) throw err;
+      const wait = RETRY_BASE_MS * attempt;
+      console.warn(`[!] Fetch error: ${err.message} — retrying in ${wait / 1000}s…`);
+      await sleep(wait);
+    }
+  }
+}
 
 function decode(s) {
   return (s || '')
@@ -89,8 +127,7 @@ function parseRows(html) {
 
 async function main() {
   console.log('[*] Fetching FDA animal-veterinary recalls…');
-  const res = await fetch(SOURCE, { headers: { 'User-Agent': UA, 'Accept': 'text/html' } });
-  if (!res.ok) throw new Error(`FDA fetch failed: HTTP ${res.status}`);
+  const res = await fetchWithRetry(SOURCE);
   const html = await res.text();
 
   const recalls = parseRows(html).sort((a, b) => b.report_date.localeCompare(a.report_date));
