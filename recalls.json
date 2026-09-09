@@ -1,5 +1,23 @@
 [
   {
+    "recall_number": "fi-recalls-supplements-dogs-because-possible-salmonella-contamination",
+    "reason_for_recall": "Potential to be contaminated with Salmonella",
+    "status": "Ongoing",
+    "distribution_pattern": "",
+    "product_description": "FI — Supplements",
+    "report_date": "2026-09-08",
+    "classification": "Class I",
+    "severity": "DANGER",
+    "brand_name": "FI",
+    "recalling_firm": "Vet Plus, Inc.",
+    "pet_type": "both",
+    "city": "",
+    "state": "",
+    "voluntary_mandated": "Voluntary: Firm initiated",
+    "recall_initiation_date": "20260908",
+    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/fi-recalls-supplements-dogs-because-possible-salmonella-contamination"
+  },
+  {
     "recall_number": "northwest-naturals-voluntarily-recalls-two-raw-pet-food-products-because-possible-salmonella",
     "reason_for_recall": "Potential contamination with Salmonella and/or Listeria monocytogenes",
     "status": "Ongoing",
@@ -160,23 +178,5 @@
     "voluntary_mandated": "Voluntary: Firm initiated",
     "recall_initiation_date": "20260522",
     "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/raaw-energy-expands-recall-dog-food-because-listeria-monocytogenes-health-risk"
-  },
-  {
-    "recall_number": "albrights-raw-pet-food-announces-voluntary-recall-select-chicken-recipe-dogs-complete-and-balanced-1",
-    "reason_for_recall": "Potential to be contaminated with Salmonella",
-    "status": "Ongoing",
-    "distribution_pattern": "",
-    "product_description": "Albright’s — Chicken Recipe for Dogs",
-    "report_date": "2026-05-07",
-    "classification": "Class I",
-    "severity": "DANGER",
-    "brand_name": "Albright’s",
-    "recalling_firm": "Albright’s Raw Pet Food",
-    "pet_type": "dog",
-    "city": "",
-    "state": "",
-    "voluntary_mandated": "Voluntary: Firm initiated",
-    "recall_initiation_date": "20260507",
-    "source_url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/albrights-raw-pet-food-announces-voluntary-recall-select-chicken-recipe-dogs-complete-and-balanced-1"
   }
 ]
